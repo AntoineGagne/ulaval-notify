@@ -43,7 +43,7 @@ if __name__ == '__main__':
         ],
         install_requires=[
             'requests>=2.18.4',
-            'notify2>=0.3.1;platform_system=="Linux"'
+            'notify2>=0.3.1;sys_platform=="linux"'
         ],
         extras_require={
             'daemon': ['python-daemon>=2.1.2']

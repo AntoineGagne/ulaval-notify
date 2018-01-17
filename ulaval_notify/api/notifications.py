@@ -1,7 +1,8 @@
-import notify2
+import sys
+
 from requests import Request
 
-from .constants import BASE_URL
+from .constants import BASE_URL, NOTIFICATION_CALLBACKS_BY_PLATFORM_NAME
 from ..utils import before
 
 
@@ -50,11 +51,20 @@ class NotificationManager:
             self._callback(notification)
 
 
-@before(notify2.init, 'ulaval-notify')
 def send_linux_notification(notification):
+    import notify2
+    notify2.init('ulaval-notify')
     notification = notify2.Notification(
         'New notification',
         '{message}'.format(message=notification.get('messageHtml')),
         ''
     )
     notification.show()
+
+
+def find_appropriate_notification_callback():
+    for platform, callback in NOTIFICATION_CALLBACKS_BY_PLATFORM_NAME:
+        if sys.platform.startswith(key):
+            return callback
+
+    return send_linux_notification

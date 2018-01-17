@@ -5,7 +5,8 @@ from time import sleep
 import requests
 
 from .api.login import User, login
-from .api.notifications import NotificationManager, send_linux_notification
+from .api.notifications import (NotificationManager,
+                                find_appropriate_notification_callback)
 from .api.session import refresh_periodically
 from .constants import SESSION_REFRESH_INTERVAL_IN_SECONDS
 from .options import parse_arguments
@@ -26,7 +27,7 @@ def _main(arguments):
         )
         notification_manager = NotificationManager(
             session_manager,
-            send_linux_notification
+            find_appropriate_notification_callback()
         )
         refresh_periodically(SESSION_REFRESH_INTERVAL_IN_SECONDS, session_manager)
 
