@@ -1,0 +1,2 @@
+def test_that_given_already_displayed_notifications_when_receiving_new_notifications_then_no_notifications_are_displayed():
+    pass

@@ -35,7 +35,7 @@ if __name__ == '__main__':
         include_package_data=True,
         long_description=get_long_description('README.rst'),
         setup_requires=['pytest-runner', 'flake8', 'pylint'],
-        tests_require=['pytest'],
+        tests_require=['pytest>=3.3.2', 'pytest-mock>=1.6.3'],
         test_suite='tests',
         scripts=[],
         classifiers=[
@@ -43,7 +43,8 @@ if __name__ == '__main__':
         ],
         install_requires=[
             'requests>=2.18.4',
-            'notify2>=0.3.1;sys_platform=="linux"'
+            'notify2>=0.3.1;sys_platform=="linux"',
+            'dbus-python>=1.2.4;sys_platform=="linux"'
         ],
         extras_require={
             'daemon': ['python-daemon>=2.1.2']

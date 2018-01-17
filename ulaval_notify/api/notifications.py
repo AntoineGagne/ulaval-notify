@@ -15,7 +15,6 @@ class NotificationManager:
         self._session_manager = session_manager
         self._callback = callback
         self._seen_notifications = set()
-        self._request = self.__create_request()
 
     def __create_request(self):
         return Request(
@@ -35,7 +34,7 @@ class NotificationManager:
         )
 
     def check_notifications(self):
-        response = self._session_manager.send(self._request)
+        response = self._session_manager.send(self._create_request())
         if not response:
             return
 
