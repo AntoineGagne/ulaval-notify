@@ -24,5 +24,6 @@ def parse_arguments():
                         required=False,
                         dest='refresh_interval',
                         default=60,
-                        help='the interval at which the session is refreshed')
+                        help='the interval at which the API is polled for '
+                             'new notifications')
     return parser.parse_args()
