@@ -2,7 +2,7 @@ import sys
 
 from requests import Request
 
-from .constants import BASE_URL, NOTIFICATION_CALLBACKS_BY_PLATFORM_NAME
+from .constants import BASE_URL
 from ..utils import before
 
 
@@ -63,7 +63,11 @@ def send_linux_notification(notification):
 
 
 def find_appropriate_notification_callback():
-    for platform, callback in NOTIFICATION_CALLBACKS_BY_PLATFORM_NAME:
+    notification_callbacks_by_platform_name = {
+        'linux': send_linux_notification
+    }
+
+    for platform, callback in notification_callbacks_by_platform_name:
         if sys.platform.startswith(key):
             return callback
 
