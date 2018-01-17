@@ -33,5 +33,5 @@ def _main(arguments):
 
         while True:
             notification_manager.check_notifications()
-            sleep(arguments.refresh_interval)
+            sleep(arguments.time_interval)
             continue

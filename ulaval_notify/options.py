@@ -22,7 +22,7 @@ def parse_arguments():
                         '--time-interval',
                         type=int,
                         required=False,
-                        dest='refresh_interval',
+                        dest='time_interval',
                         default=60,
                         help='the interval at which the API is polled for '
                              'new notifications')
