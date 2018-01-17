@@ -2,6 +2,7 @@ import notify2
 from requests import Request
 
 from .constants import BASE_URL
+from ..utils import before
 
 
 class NotificationManager:
@@ -49,8 +50,8 @@ class NotificationManager:
             self._callback(notification)
 
 
+@before(notify2.init, 'ulaval-notify')
 def send_linux_notification(notification):
-    notify2.init('ulaval-notify')
     notification = notify2.Notification(
         'New notification',
         '{message}'.format(message=notification.get('messageHtml')),
