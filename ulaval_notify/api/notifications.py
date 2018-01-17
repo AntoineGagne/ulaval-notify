@@ -1,42 +1,59 @@
 import notify2
-
 from requests import Request
 
 from .constants import BASE_URL
 
 
-NOTIFICATION_ROUTE = '{base_url}/communication/v1/messagesimportants'.format(
-    base_url=BASE_URL
-)
-
-def check_notifications(session_manager, callback):
-    request = Request(
-        'GET',
-        NOTIFICATION_ROUTE,
-        params={
-            'idutilisateurmpo': session_manager.user_details.user_id,
-            'statutpublication': 'PUBLIE',
-            'statutlecture': 'NON_VUE'
-        },
-        headers={
-            'Authorization': '{token_type} {token}'.format(
-                token_type=session_manager.token_details.token_type,
-                token=session_manager.token_details.token
-            ),
-            'Accept': 'application/json, text/plain, */*'
-        }
+class NotificationManager:
+    notification_route = '{base_url}/communication/v1/messagesimportants'.format(
+        base_url=BASE_URL
     )
-    response = session_manager.send(request)
-    callback(response.json() if response else {})
+
+    def __init__(self, session_manager, callback):
+        self._session_manager = session_manager
+        self._callback = callback
+        self._seen_notifications = set()
+        self._request = self.__create_request()
+
+    def __create_request(self):
+        return Request(
+            'GET',
+            NotificationManager.notification_route,
+            params={
+                'idutilisateurmpo': self._session_manager.user_details.user_id,
+                'statutpublication': 'PUBLIE'
+            },
+            headers={
+                'Authorization': '{token_type} {token}'.format(
+                    token_type=self._session_manager.token_details.token_type,
+                    token=self._session_manager.token_details.token
+                ),
+                'Accept': 'application/json, text/plain, */*'
+            }
+        )
+
+    def check_notifications(self):
+        response = self._session_manager.send(self._request)
+        if not response:
+            return
+
+        response = response.json()
+        self._display_notifications(
+            notification for notification in response.get('messagesImportants', ())
+            if notification.get('idMessageImportant') not in self._seen_notifications
+        )
+
+    def _display_notifications(self, notifications):
+        for notification in notifications:
+            self._seen_notifications.add(notification.get('idMessageImportant'))
+            self._callback(notification)
 
 
-
-def send_linux_notification(notifications_details):
-    messages_number = notifications_details.get('nombreTotalMessagesImportants')
+def send_linux_notification(notification):
     notify2.init('ulaval-notify')
     notification = notify2.Notification(
-        'New notifications',
-        '{messages_number}'.format(messages_number=messages_number),
+        'New notification',
+        '{message}'.format(message=notification.get('messageHtml')),
         ''
     )
     notification.show()
