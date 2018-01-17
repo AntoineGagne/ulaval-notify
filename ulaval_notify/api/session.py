@@ -1,5 +1,6 @@
 from collections import namedtuple
-from threading import Lock
+from copy import copy
+from threading import Lock, Timer
 
 from .constants import API_URL, BASE_URL
 
@@ -20,6 +21,12 @@ UserDetails = namedtuple(
         'change_number'
     ]
 )
+
+
+def refresh_periodically(interval, session_manager):
+    session_manager.refresh()
+    timer = Timer(interval, refresh_periodically, args=(interval, session_manager))
+    timer.start()
 
 
 def create_token(token_details):
@@ -53,7 +60,7 @@ class SessionManager:
     )
 
     def __init__(self, session, cookie_name, cookie_content):
-        self._session = session
+        self.__session = session
         self.__lock = Lock()
         self._cookie_name = cookie_name
         self._update_cookies(cookie_content)
@@ -61,7 +68,7 @@ class SessionManager:
         self.user_details = create_user_details(cookie_content['utilisateurMpo'])
 
     def _update_cookies(self, cookie_content):
-        self.session.cookies.set(
+        self.__session.cookies.set(
             self._cookie_name,
             cookie_content,
             domain='monportail.ulaval.ca',
@@ -70,21 +77,26 @@ class SessionManager:
         )
 
     @property
-    def session(self):
+    def _session(self):
+        return copy(self.__session)
+
+    def send(self, request):
         with self.__lock:
-            return self._session
+            self._session.send(request)
 
     def refresh(self):
-        self._refresh_session()
-        response = self._refresh_token().json()
-        self._update_cookies(response)
-        self.token_details = create_token(response['detailsToken'])
+        print("test")
+        with self.__lock:
+            self._refresh_session()
+            response = self._refresh_token().json()
+            self._update_cookies(response)
+            self.token_details = create_token(response['detailsToken'])
 
     def _refresh_session(self):
-        self._session.post(SessionManager.refresh_session_route)
+        self.__session.post(SessionManager.refresh_session_route)
 
     def _refresh_token(self):
-        return self.session.post(
+        return self.__session.post(
             SessionManager.refresh_token_route,
             headers={
                 'Authorization': '{token_type} {token}'.format(
