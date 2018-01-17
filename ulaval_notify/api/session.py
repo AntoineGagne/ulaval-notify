@@ -25,7 +25,11 @@ UserDetails = namedtuple(
 
 def refresh_periodically(interval, session_manager):
     session_manager.refresh()
-    timer = Timer(interval, refresh_periodically, args=(interval, session_manager))
+    timer = Timer(
+        interval,
+        refresh_periodically,
+        args=(interval, session_manager)
+    )
     timer.start()
 
 

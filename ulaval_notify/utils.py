@@ -21,3 +21,17 @@ class before(Decorator):
     def wraps(self, *args, **kwargs):
         self.g()
         self.f(*args, **kwargs)
+
+
+def dummy_wrap(f, *args, **kwargs):
+    f(*args, **kwargs)
+
+
+def run_as_daemon(f, *args, **kwargs):
+    try:
+        import daemon
+        with daemon.DaemonContext():
+            f(*args, **kwargs)
+    except (ImportError):
+        print('You must be on a UNIX platform to use this feature and must'
+              'have installed `python-daemon`')

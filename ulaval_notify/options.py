@@ -1,5 +1,7 @@
 from argparse import ArgumentParser
 
+from .utils import dummy_wrap, run_as_daemon
+
 
 def parse_arguments():
     """Create an :class:`argparse.ArgumentParser` and parse the command-line
@@ -10,10 +12,12 @@ def parse_arguments():
                                         'notifications on monPortail')
     parser.add_argument('-d',
                         '--daemon',
-                        action="store_true",
-                        default=False,
-                        dest='is_daemon',
-                        help='run the program in the background')
+                        action="store_const",
+                        default=dummy_wrap,
+                        const=run_as_daemon,
+                        dest='daemonize',
+                        help='run the program in the background (requires the '
+                             '`python-daemon` package)')
     parser.add_argument('-t',
                         '--time-interval',
                         type=int,

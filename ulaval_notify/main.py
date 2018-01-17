@@ -13,7 +13,7 @@ from .options import parse_arguments
 
 def main():
     arguments = parse_arguments()
-    _main(arguments)
+    arguments.daemonize(_main, arguments)
 
 
 def _main(arguments):
