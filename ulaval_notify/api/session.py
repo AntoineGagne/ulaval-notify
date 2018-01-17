@@ -81,11 +81,13 @@ class SessionManager:
         return copy(self.__session)
 
     def send(self, request):
+        response = None
         with self.__lock:
-            self._session.send(request)
+            response = self._session.send(self._session.prepare_request(request))
+
+        return response
 
     def refresh(self):
-        print("test")
         with self.__lock:
             self._refresh_session()
             response = self._refresh_token().json()
