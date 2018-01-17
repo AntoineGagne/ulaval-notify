@@ -2,17 +2,15 @@ import getpass
 
 import requests
 
-from .api.login import LoginManager, User
+from .api.login import User, login
+
 
 def main():
-    with requests.Session() as SESSION:
-        REQUEST = LoginManager(SESSION)
-        LOCATION_URL = '{0}/auth/deleguer/?urlretour={0}/'.format(BASE_URL)
-        REQUEST.fetch_cookies(LOCATION_URL)
-
-        USERNAME = input('Username: ')
-        PASSWORD = getpass.getpass()
-        REQUEST.login(User(USERNAME, PASSWORD),
-                                 AUTHENTICATION_PAGE_URL)
-        RESPONSE = REQUEST.session.post("https://monportail.ulaval.ca/auth/rafraichirtoken/", headers={'Authorization': AUTHORIZATION['detailsToken']['token'], 'Accept': 'application/json, text/plain, */*'})
-        print(json.dumps(RESPONSE.json()))
+    with requests.Session() as session:
+        username = input('Username: ')
+        password = getpass.getpass()
+        session_manager = login(
+            session,
+            User(username=username, password=password)
+        )
+        session_manager.refresh()

@@ -23,7 +23,10 @@ if __name__ == '__main__':
         author='Antoine Gagné',
         keywords='notifications',
         author_email='antoine.gagne.2@ulaval.ca',
-        packages=['ulaval_notify'],
+        packages=[
+            'ulaval_notify',
+            'ulaval_notify.api'
+        ],
         entry_points={
             'console_scripts': ['ulaval-notify = ulaval_notify.main:main']
         },
@@ -38,5 +41,5 @@ if __name__ == '__main__':
         classifiers=[
             'Programming Language :: Python :: 3.6',
         ],
-        install_requires=['python-daemon']
+        install_requires=['python-daemon', 'requests']
     )
