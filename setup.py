@@ -41,5 +41,11 @@ if __name__ == '__main__':
         classifiers=[
             'Programming Language :: Python :: 3.6',
         ],
-        install_requires=['python-daemon', 'requests', 'notify2']
+        install_requires=[
+            'requests>=2.18.4',
+            'notify2>=0.3.1;platform_system=="Linux"'
+        ],
+        extras_require={
+            'daemon': ['python-daemon>=2.1.2']
+        }
     )
