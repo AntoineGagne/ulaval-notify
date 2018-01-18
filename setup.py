@@ -23,6 +23,9 @@ if __name__ == '__main__':
         author='Antoine Gagné',
         keywords='notifications',
         author_email='antoine.gagne.2@ulaval.ca',
+        zip_safe=False,
+        platforms='any',
+        python_requires='>=3',
         packages=[
             'ulaval_notify',
             'ulaval_notify.api'
@@ -39,10 +42,10 @@ if __name__ == '__main__':
             'pytest-runner',
             'pytest>=3.3.2',
             'flake8',
-            'pylint'
+            'pylint',
+            'coverage'
         ],
         test_suite='tests',
-        python_requires='>=3',
         scripts=[],
         classifiers=[
             'Programming Language :: Python :: 3',
