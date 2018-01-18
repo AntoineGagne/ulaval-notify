@@ -42,13 +42,17 @@ class NotificationManager:
 
         response = response.json()
         self._display_notifications(
-            notification for notification in response.get('messagesImportants', ())
-            if notification.get('idMessageImportant') not in self._seen_notifications
+            notification for notification
+            in response.get('messagesImportants', ())
+            if notification.get('idMessageImportant')
+            not in self._seen_notifications
         )
 
     def _display_notifications(self, notifications):
         for notification in notifications:
-            self._seen_notifications.add(notification.get('idMessageImportant'))
+            self._seen_notifications.add(
+                notification.get('idMessageImportant')
+            )
             self._callback(notification)
 
 
