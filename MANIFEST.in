@@ -1,4 +1,4 @@
-include README.rst tox.ini Makefile
+include README.rst tox.ini Makefile LICENSE
 
 graft docs
 graft tests
