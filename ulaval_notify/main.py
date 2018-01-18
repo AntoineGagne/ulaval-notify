@@ -1,3 +1,9 @@
+"""This module contains the code related to the application execution.
+
+:copyright: (c) 2018 by Antoine Gagné.
+:license: MIT, see LICENSE for more details.
+"""
+
 import sys
 from time import sleep
 
@@ -14,6 +20,7 @@ from .options import parse_arguments
 
 
 def main():
+    """The main entry point of the application."""
     arguments = parse_arguments()
     arguments.daemonize(_main, arguments)
 

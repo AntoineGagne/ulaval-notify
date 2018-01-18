@@ -1,3 +1,9 @@
+"""This module contains the code related to the parsing of the command line options.
+
+:copyright: (c) 2018 by Antoine Gagné.
+:license: MIT, see LICENSE for more details.
+"""
+
 import os.path
 from argparse import ArgumentParser, FileType
 
