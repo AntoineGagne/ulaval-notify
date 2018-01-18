@@ -38,7 +38,6 @@ class NotificationManager:
         if not response:
             return
 
-        response = response.json()
         self._display_notifications(
             notification for notification
             in response.get('messagesImportants', ())

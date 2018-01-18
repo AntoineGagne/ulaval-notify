@@ -91,9 +91,11 @@ class SessionManager:
     def send(self, request):
         response = None
         with self.__lock:
-            response = self._session.send(self._session.prepare_request(request))
+            response = self._session.send(
+                self._session.prepare_request(request)
+            )
 
-        return response
+        return response.json() if response else response
 
     def refresh(self):
         with self.__lock:
