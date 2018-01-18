@@ -22,6 +22,7 @@ if __name__ == '__main__':
         description='Display monPortail notifications',
         author='Antoine Gagné',
         author_email='antoine.gagne.2@ulaval.ca',
+        url='https://github.com/AntoineGagne/ulaval-notify',
         keywords='notifications',
         zip_safe=False,
         platforms='any',
