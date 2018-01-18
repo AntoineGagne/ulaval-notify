@@ -1,3 +1,5 @@
+MAIN_PACKAGE := ulaval_notify
+
 .PHONY: init
 init:
 	@pip install -r requirements.txt
@@ -9,6 +11,13 @@ install:
 .PHONY: build
 build:
 	@./setup.py build
+
+.PHONY: check
+check: init
+	@echo "================== flake8 =================="
+	@flake8 --show-source --statistics $(MAIN_PACKAGE)
+	@echo -e "\n\n================== pylint =================="
+	@pylint $(MAIN_PACKAGE)
 
 .PHONY: test
 test:
@@ -23,7 +32,7 @@ tox: test-all
 
 .PHONY: coverage
 coverage: init
-	@coverage run --source ulaval_notify -m py.test
+	@coverage run --source $(MAIN_PACKAGE) -m py.test
 	@coverage report
 	@coverage html
 
