@@ -164,10 +164,7 @@ class SessionManager:
     def _refresh_token(self):
         request = Request(
             'POST',
-            SessionManager.refresh_token_route,
-            headers={
-                'Accept': 'application/json, text/plain, */*'
-            }
+            SessionManager.refresh_token_route
         )
 
         return self.send(request)
