@@ -85,7 +85,7 @@ def send_linux_notification(notification):
 
 def find_appropriate_notification_callback(platform_name):
     """Find the appropriate notification sender given the platform name.
-    
+
     :param platform_name: The name of the platform the application is running
                           on
     :returns: The appropriate callback to send notifications according to the
