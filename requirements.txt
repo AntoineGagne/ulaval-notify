@@ -2,5 +2,6 @@ requests
 flake8
 pylint
 pytest
+coverage
 tox
 Sphinx
