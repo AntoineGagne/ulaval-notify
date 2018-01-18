@@ -18,7 +18,7 @@ def get_long_description(file_name: str) -> str:
 if __name__ == '__main__':
     setup(
         name='ulaval-notify',
-        version='0.0.0',
+        version='0.1.0',
         description='Display monPortail notifications',
         author='Antoine Gagné',
         author_email='antoine.gagne.2@ulaval.ca',
