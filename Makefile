@@ -50,6 +50,7 @@ clean-bytecode:
 	@find . -name '*.pyc' -type f -delete
 	@find . -name '*.pyo' -type f -delete
 	@find . -name '*~' -type f -delete
+	@find . -name '__pycache__' -type d -exec rm -fr {} +
 
 .PHONY: clean-coverage
 clean-coverage:
@@ -79,8 +80,8 @@ clean-cache:
 
 .PHONY: clean-dev
 clean-dev:
-	@rm -rf .mypy_cache
-	@rm -rf .ropeproject
+	@find . -name '.mypy_cache' -type d -exec rm -fr {} +
+	@find . -name '.ropeproject' -type d -exec rm -fr {} +
 
 .PHONY: release
 release: clean
