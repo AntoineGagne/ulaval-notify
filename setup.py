@@ -41,8 +41,7 @@ if __name__ == '__main__':
             'pytest-mock>=1.6.3',
             'pytest-runner',
             'pytest>=3.3.2',
-            'flake8',
-            'pylint',
+            'tox',
             'coverage'
         ],
         test_suite='tests',
@@ -60,6 +59,10 @@ if __name__ == '__main__':
             'dbus-python>=1.2.4;sys_platform=="linux"'
         ],
         extras_require={
-            'daemon': ['python-daemon>=2.1.2']
+            'daemon': ['python-daemon>=2.1.2'],
+            'dev': [
+                'flake8',
+                'pylint'
+            ]
         }
     )

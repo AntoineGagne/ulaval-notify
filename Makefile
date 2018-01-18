@@ -4,7 +4,7 @@ init:
 
 .PHONY: install
 install:
-	@./setup.py install --optimize=1 --record=install.log
+	@./setup.py install --optimize=2 --record=install.log
 
 .PHONY: build
 build:
@@ -14,8 +14,15 @@ build:
 test:
 	@./setup.py test
 
+.PHONY: test-all
+test-all: init
+	@tox
+
+.PHONY: tox
+tox: test-all
+
 .PHONY: coverage
-coverage:
+coverage: init
 	@coverage run --source ulaval_notify -m py.test
 	@coverage report
 	@coverage html

@@ -1,0 +1,3 @@
+*.py eof=lf
+*.sh eof=lf
+*.bash eof=lf
