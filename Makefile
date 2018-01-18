@@ -38,7 +38,12 @@ coverage: init
 
 .PHONY: clean
 clean: clean-bytecode clean-coverage clean-eggs \
-	clean-dist clean-build clean-tox clean-cache clean-dev
+	clean-dist clean-build clean-tox clean-cache \
+	clean-dev clean-install
+
+.PHONY: clean-install
+clean-install:
+	@rm -f install.log
 
 .PHONY: clean-bytecode
 clean-bytecode:
