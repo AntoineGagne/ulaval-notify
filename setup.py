@@ -38,7 +38,6 @@ if __name__ == '__main__':
         include_package_data=True,
         long_description=get_long_description('README.rst'),
         tests_require=[
-            'pytest-mock>=1.6.3',
             'pytest-runner',
             'pytest>=3.3.2',
             'tox',
@@ -62,7 +61,8 @@ if __name__ == '__main__':
             'daemon': ['python-daemon>=2.1.2'],
             'dev': [
                 'flake8',
-                'pylint'
+                'pylint',
+                'Sphinx'
             ]
         }
     )

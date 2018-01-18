@@ -2,5 +2,5 @@ requests
 flake8
 pylint
 pytest
-pytest-mock
 tox
+Sphinx
