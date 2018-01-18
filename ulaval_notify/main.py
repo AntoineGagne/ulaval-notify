@@ -1,5 +1,4 @@
-import getpass
-
+import sys
 from time import sleep
 
 import requests
@@ -30,7 +29,7 @@ def _main(arguments):
         )
         notification_manager = NotificationManager(
             session_manager,
-            find_appropriate_notification_callback(),
+            find_appropriate_notification_callback(sys.platform),
             create_request
         )
         refresh_periodically(SESSION_REFRESH_INTERVAL_IN_SECONDS, session_manager)

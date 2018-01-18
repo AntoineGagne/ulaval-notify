@@ -6,8 +6,12 @@ from .constants import API_URL, BASE_URL
 
 
 Token = namedtuple(
-    'Token',
-    ['client_id', 'token', 'token_type', 'expiration_date']
+    'Token', [
+        'client_id',
+        'token',
+        'token_type',
+        'expiration_date'
+    ]
 )
 
 UserDetails = namedtuple(

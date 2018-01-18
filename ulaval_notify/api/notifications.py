@@ -1,5 +1,3 @@
-import sys
-
 from requests import Request
 from pkg_resources import resource_filename
 
@@ -67,14 +65,14 @@ def send_linux_notification(notification):
     notification.show()
 
 
-def find_appropriate_notification_callback():
+def find_appropriate_notification_callback(platform_name):
     notification_callbacks_by_platform_name = {
         'linux': send_linux_notification
     }
 
     notification_callback = send_linux_notification
     for platform, callback in notification_callbacks_by_platform_name.items():
-        if sys.platform.startswith(platform):
+        if platform_name.startswith(platform):
             notification_callback = callback
 
     return notification_callback
