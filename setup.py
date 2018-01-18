@@ -34,12 +34,22 @@ if __name__ == '__main__':
         data_files=[],
         include_package_data=True,
         long_description=get_long_description('README.rst'),
-        setup_requires=['pytest-runner', 'flake8', 'pylint'],
-        tests_require=['pytest>=3.3.2', 'pytest-mock>=1.6.3'],
+        tests_require=[
+            'pytest-mock>=1.6.3',
+            'pytest-runner',
+            'pytest>=3.3.2',
+            'flake8',
+            'pylint'
+        ],
         test_suite='tests',
+        python_requires='>=3',
         scripts=[],
         classifiers=[
+            'Programming Language :: Python :: 3',
             'Programming Language :: Python :: 3.6',
+            'Operating System :: Unix',
+            'Operating System :: MacOS :: MacOS X',
+            'Operating System :: Microsoft :: Windows',
         ],
         install_requires=[
             'requests>=2.18.4',
