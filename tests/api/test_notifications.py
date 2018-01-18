@@ -30,7 +30,7 @@ def create_request_stub():
     return mock.MagicMock()
 
 
-def test_that_given_already_displayed_notifications_when_receiving_new_notifications_then_no_notifications_are_displayed(session_manager_mock, callback_stub, create_request_stub):
+def test_that_given_already_displayed_notifications_when_check_notifications_then_no_notifications_are_displayed(session_manager_mock, callback_stub, create_request_stub):
     notification_manager = NotificationManager(
         session_manager_mock,
         callback_stub,
