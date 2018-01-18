@@ -3,7 +3,6 @@ import sys
 from requests import Request
 
 from .constants import BASE_URL
-from ..utils import before
 
 
 def create_request(session_manager):
