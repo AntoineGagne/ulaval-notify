@@ -37,13 +37,45 @@ coverage: init
 	@coverage html
 
 .PHONY: clean
-clean: clean-bytecode
+clean: clean-bytecode clean-coverage clean-eggs \
+	clean-dist clean-build clean-tox clean-cache clean-dev
 
 .PHONY: clean-bytecode
 clean-bytecode:
 	@find . -name '*.pyc' -type f -delete
 	@find . -name '*.pyo' -type f -delete
 	@find . -name '*~' -type f -delete
+
+.PHONY: clean-coverage
+clean-coverage:
+	@rm -rf htmlcov
+	@rm -f .coverage
+
+.PHONY: clean-eggs
+clean-eggs:
+	@rm -rf .eggs
+	@rm -rf *.egg-info
+
+.PHONY: clean-dist
+clean-dist:
+	@rm -rf dist
+
+.PHONY: clean-build
+clean-build:
+	@rm -rf build
+
+.PHONY: clean-tox
+clean-tox:
+	@rm -rf .tox
+
+.PHONY: clean-cache
+clean-cache:
+	@rm -rf .cache
+
+.PHONY: clean-dev
+clean-dev:
+	@rm -rf .mypy_cache
+	@rm -rf .ropeproject
 
 .PHONY: release
 release: clean
