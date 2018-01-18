@@ -1,4 +1,5 @@
-from argparse import ArgumentParser
+import os.path
+from argparse import ArgumentParser, FileType
 
 from .utils import dummy_wrap, run_as_daemon
 
@@ -26,4 +27,13 @@ def parse_arguments():
                         default=60,
                         help='the interval at which the API is polled for '
                              'new notifications')
+    parser.add_argument('-c',
+                        '--configuration-file',
+                        type=FileType('r'),
+                        required=False,
+                        dest='configuration_file',
+                        default=open(os.path.expanduser('~/.ulaval-notify.ini')),
+                        help='the configuration file that contains the '
+                             'options such as the username and password '
+                             '(default: ~/.ulaval-notify)')
     return parser.parse_args()

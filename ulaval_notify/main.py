@@ -10,6 +10,7 @@ from .api.notifications import (NotificationManager,
                                 create_request)
 from .api.session import refresh_periodically
 from .constants import SESSION_REFRESH_INTERVAL_IN_SECONDS
+from .configuration import read_configuration_file
 from .options import parse_arguments
 
 
@@ -20,11 +21,12 @@ def main():
 
 def _main(arguments):
     with requests.Session() as session:
-        username = input('Username: ')
-        password = getpass.getpass()
+        configuration_options = read_configuration_file(
+            arguments.configuration_file
+        )
         session_manager = login(
             session,
-            User(username=username, password=password)
+            User(**configuration_options.authentication)
         )
         notification_manager = NotificationManager(
             session_manager,
