@@ -44,3 +44,19 @@ clean-bytecode:
 	@find . -name '*.pyc' -type f -delete
 	@find . -name '*.pyo' -type f -delete
 	@find . -name '*~' -type f -delete
+
+.PHONY: release
+release: clean
+	@./setup.py sdist upload
+	@./setup.py bdist_wheel upload
+
+.PHONY: dist
+dist: clean
+	@./setup.py sdist
+	@./setup.py bdist_wheel
+
+.PHONY: docs
+docs:
+	@sphinx-apidoc -o docs/ $(MAIN_PACKAGE)
+	@$(MAKE) -C docs clean
+	@$(MAKE) -C docs html
