@@ -1,6 +1,7 @@
 import sys
 
 from requests import Request
+from pkg_resources import resource_filename
 
 from .constants import BASE_URL
 
@@ -57,7 +58,7 @@ def send_linux_notification(notification):
     notification = notify2.Notification(
         'New notification',
         '{message}'.format(message=notification.get('messageHtml')),
-        ''
+        resource_filename('ulaval_notify', 'resources/images/ulaval-logo.png')
     )
     notification.show()
 

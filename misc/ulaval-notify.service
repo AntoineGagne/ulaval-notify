@@ -1,0 +1,14 @@
+[Unit]
+Description=Laval University Notifications
+
+[Service]
+ExecStart=ulaval-notify
+Type=simple
+Restart=on-failure
+RestartSec=5min
+StandardInput=null
+StandardOutput=null
+StandardError=null
+
+[Install]
+WantedBy=default.target

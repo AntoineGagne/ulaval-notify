@@ -1,6 +1,8 @@
 include README.rst tox.ini Makefile LICENSE
 
 graft docs
+graft misc
 graft tests
+graft ulaval_notify/resources
 
 global-exclude *.py[co]
